@@ -10,6 +10,6 @@ Puedes duplicar el archivo `.env.example` y renombrarlo a `.env`:
 
 ```bash
 cp .env.example .env
-
+```
 #### PASO 2
 Para poder obtener las variables de entorno reales, envíale un mensaje al Dev más chingón de Manza, taekwondoin que existe, mamado, con nalgas de adamantium, precioso, detallista y sobre todo para nada creído
