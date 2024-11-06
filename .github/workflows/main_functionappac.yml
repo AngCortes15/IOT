@@ -37,7 +37,7 @@ jobs:
       name: 'Production'
       url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
     permissions:
-      id-token: write #This is required for requesting the JWT
+      id-token: write # This is required for requesting the JWT
 
     steps:
       - name: Download artifact from build job
@@ -47,7 +47,10 @@ jobs:
 
       - name: Unzip artifact for deployment
         run: unzip release.zip
-      
+
+      - name: Wait for SCM container to stabilize
+        run: sleep 30  # Espera 30 segundos para evitar conflictos con el contenedor SCM
+
       - name: Login to Azure
         uses: azure/login@v2
         with:
@@ -63,6 +66,6 @@ jobs:
           slot-name: 'Production'
           package: ./release.zip
 
-      - name: Start the application
-        run: npm start
-    
+      # Este paso es innecesario en GitHub Actions, ya que Azure gestiona el inicio de la app
+      # - name: Start the application
+      #   run: npm start
