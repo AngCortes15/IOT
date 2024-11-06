@@ -1,4 +1,5 @@
 const express = require('express');
+const path = require('path'); // Módulo para manejar rutas de archivos
 const mongoose = require('mongoose');
 const dotenv = require('dotenv');
 const carRoutes = require('./routes/carRoutes');
@@ -14,6 +15,9 @@ app.use(express.json());
 // Ver que funcionen las variables de entorno
 // console.log('Conexión a MongoDB:', process.env.MONGO_URI);
 
+// Configurar la carpeta 'public' como carpeta estática
+app.use(express.static(path.join(__dirname, 'public')));
+
 
 // Conectar a MongoDB usando Mongoose
 mongoose.connect(process.env.MONGO_URI, {
@@ -28,8 +32,11 @@ mongoose.connect(process.env.MONGO_URI, {
 
 // Definir una ruta de prueba
 app.get('/', (req, res) => {
-    res.send('API funcionando correctamente :D');
-});
+    res.sendFile(path.join(__dirname, 'public', 'index.html'));
+  });
+// app.get('/', (req, res) => {
+//     res.send('API funcionando correctamente :D');
+// });
 
 // Definir las rutas
 app.use('/api/carritos', carRoutes); // Usa las rutas para la base de datos de carritos

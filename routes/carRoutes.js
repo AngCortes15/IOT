@@ -1,10 +1,12 @@
 const express = require('express');
 const router = express.Router();
 const Carrito = require('../models/carritoModel'); // Importa el modelo carritoModel
+const path = require('path'); // Módulo para manejar rutas de archivos
 
 // Obtener todos los registros de carritos
 router.get('/', async (req, res) => {
   try {
+    // res.sendFile(path.join(__dirname, '../public', 'index.html'));
     const carritos = await Carrito.find();
     res.json(carritos);
   } catch (error) {
