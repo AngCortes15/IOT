@@ -15,9 +15,9 @@ router.get('/', async (req, res) => {
 });
 
 // Obtener un registro específico de carrito por ID
-router.get('/:id', async (req, res) => {
+router.get('/:id_carrito', async (req, res) => {
   try {
-    const carrito = await Carrito.findById(req.params.id);
+    const carrito = await Carrito.findOne({ id_carrito: req.params.id_carrito });
     if (!carrito) {
       return res.status(404).json({ error: 'Registro no encontrado' });
     }
@@ -51,12 +51,12 @@ router.post('/', async (req, res) => {
 });
 
 // Actualizar un registro de carrito por ID
-router.put('/:id', async (req, res) => {
+router.put('/:id_carrito', async (req, res) => {
   const { id_carrito, posicion, trayectoria, interseccion, peatones, vehiculos, paradas, duracion_paradas } = req.body;
 
   try {
-    const updatedCarrito = await Carrito.findByIdAndUpdate(
-      req.params.id,
+    const updatedCarrito = await Carrito.findOneAndUpdate(
+      { id_carrito: req.params.id_carrito },
       {
         id_carrito,
         posicion,
